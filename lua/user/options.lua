@@ -70,6 +70,7 @@ end
 
 -- TODO: can we do these with :append?
 vim.cmd [[
+  set expandtab
   set whichwrap+=<,>,[,],h,l
   set iskeyword+=-
   set formatoptions-=cro
