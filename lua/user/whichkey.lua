@@ -168,10 +168,10 @@ local terminal = {
   ["<C-n>"]   = map("New",                        "<cmd>FloatermNew<CR>"),
   ["<C-h>"]   = map("Prev",                       "<cmd>FloatermPrev<CR>"),
   ["<C-l>"]   = map("Next",                       "<cmd>FloatermNext<CR>"),
-  ["<leader>"] = {
-    t         = map("Exit",                       "<cmd>FloatermToggle<CR>"),
-    x         = map("Kill",                       "<cmd>FloatermKill<CR>"),
-  },
+  -- ["<leader>"] = {
+  --   t         = map("Exit",                       "<cmd>FloatermToggle<CR>"),
+  --   x         = map("Kill",                       "<cmd>FloatermKill<CR>"),
+  -- },
 }
 
 -- these need expr = true
