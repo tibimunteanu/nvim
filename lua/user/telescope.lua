@@ -1,14 +1,15 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-  vim.notify("Telescope not found!")
-  return
+	vim.notify("Telescope not found!")
+	return
 end
 
 telescope.load_extension("git_worktree")
-telescope.load_extension('fzy_native')
+telescope.load_extension("fzy_native")
 
-local actions = require "telescope.actions"
+local actions = require("telescope.actions")
 
+-- stylua: ignore start
 telescope.setup {
   defaults = {
     prompt_prefix       = " ",
@@ -93,24 +94,25 @@ telescope.setup {
     },
   },
 }
+-- stylua: ignore end
 
 local M = {}
 
 M.config_files = function()
-    require('telescope.builtin').find_files({
-        prompt_title = "vim",
-        cwd = "~/.config/nvim/",
-    })
+	require("telescope.builtin").find_files({
+		prompt_title = "vim",
+		cwd = "~/.config/nvim/",
+	})
 end
 
 M.git_branches = function()
-    require("telescope.builtin").git_branches({
-        attach_mappings = function(_, map)
-            map('i', '<c-d>', actions.git_delete_branch)
-            map('n', '<c-d>', actions.git_delete_branch)
-            return true
-        end
-    })
+	require("telescope.builtin").git_branches({
+		attach_mappings = function(_, map)
+			map("i", "<c-d>", actions.git_delete_branch)
+			map("n", "<c-d>", actions.git_delete_branch)
+			return true
+		end,
+	})
 end
 
 return M

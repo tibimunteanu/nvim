@@ -1,3 +1,4 @@
+-- stylua: ignore start
 local options = {
   fileencoding = "utf-8",                  -- the encoding written to a file
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
@@ -61,17 +62,18 @@ local options = {
   --fillchars = "stl:\ ,stlnc:\ ,fold:\ "
   --listchars = "tab:→\ ,trail:•"
 }
+-- stylua: ignore end
 
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append("c")
 
 for k, v in pairs(options) do
-  vim.opt[k] = v
+	vim.opt[k] = v
 end
 
 -- TODO: can we do these with :append?
-vim.cmd [[
+vim.cmd([[
   set expandtab
   set whichwrap+=<,>,[,],h,l
   set iskeyword+=-
   set formatoptions-=cro
-]]
+]])

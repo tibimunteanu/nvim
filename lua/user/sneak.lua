@@ -1,5 +1,5 @@
 -- TODO: migrate to lua
-vim.cmd [[
+vim.cmd([[
   let g:sneak#label = 0
 
   " 2-character Sneak (default)
@@ -39,4 +39,4 @@ vim.cmd [[
   " label-mode
   nmap <leader>s <Plug>SneakLabel_s
   nmap <leader>S <Plug>SneakLabel_S
-]]
+]])

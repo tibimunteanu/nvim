@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
   let g:scratch_filetype='markdown'
   let g:scratch_top=0
   let g:scratch_horizontal=1
@@ -10,4 +10,4 @@ vim.cmd [[
     autocmd!
     autocmd FileType markdown,scratch nmap <esc> <C-w>k
   augroup end
-]]
+]])
