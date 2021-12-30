@@ -68,6 +68,7 @@ local normal = {
     f = {
       name    = "Find",
       v       = map("Config files",               "<cmd>lua require('user.telescope').config_files()<CR>"),
+      c       = map("Colorscheme files",          "<cmd>lua require('user.telescope').colorscheme_files()<CR>"),
       a       = map("All files",                  "<cmd>Telescope find_files<CR>"),
       f       = map("Git files",                  "<cmd>Telescope git_files<CR>"),
       o       = map("Buffers",                    "<cmd>Telescope buffers<CR>"),

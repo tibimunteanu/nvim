@@ -105,6 +105,13 @@ M.config_files = function()
 	})
 end
 
+M.colorscheme_files = function()
+	require("telescope.builtin").find_files({
+		prompt_title = "colorscheme",
+		cwd = "~/.local/share/nvim/site/pack/packer/start/darknvim/",
+	})
+end
+
 M.git_branches = function()
 	require("telescope.builtin").git_branches({
 		attach_mappings = function(_, map)

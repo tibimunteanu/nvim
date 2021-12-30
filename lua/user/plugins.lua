@@ -58,7 +58,7 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 	use("mtth/scratch.vim")
 	use("justinmk/vim-sneak")
-	use("lunarvim/darkplus.nvim")
+	use("tibimunteanu/darknvim")
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
@@ -81,13 +81,13 @@ return packer.startup(function(use)
 	use("p00f/nvim-ts-rainbow")
 	use("lewis6991/gitsigns.nvim")
 	use("CosmicNvim/cosmic-ui")
+	use("tpope/vim-fugitive")
 
-	-- use "ahmedkhalf/project.nvim"
-	-- use "lewis6991/impatient.nvim"
-	-- use "lukas-reineke/indent-blankline.nvim"
-	-- use "goolord/alpha-nvim"
-	-- use 'tpope/vim-fugitive'
-	-- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
+	-- use("ahmedkhalf/project.nvim")
+	-- use("lewis6991/impatient.nvim")
+	-- use("lukas-reineke/indent-blankline.nvim")
+	-- use("goolord/alpha-nvim")
+	-- use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
