@@ -62,6 +62,7 @@ local normal = {
     n         = map("Sync explorer",              "<cmd>NvimTreeFindFile<CR>"),
     s         = map("Swap panes",                 "<C-w>r<cmd>NvimTreeToggle<CR><cmd>NvimTreeToggle<CR><C-w>l"),
     c         = map("Close buffer",               "<cmd>Bdelete<CR>"),
+    x         = map("Close window",               "<cmd>x<CR>"),
     w         = map("Scratch buffer",             "<cmd>Scratch<CR>"),
     t         = map("Open terminal",              "<cmd>FloatermToggle<<CR>"),
 
