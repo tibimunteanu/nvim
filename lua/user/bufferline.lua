@@ -4,6 +4,29 @@ if not status_ok then
 	return
 end
 
+local M = {}
+M.toggle_pin = function()
+	local id = vim.api.nvim_get_current_buf()
+	if bufferline.pinned[id] == true then
+		bufferline.pinned[id] = false
+	else
+		bufferline.pinned[id] = true
+	end
+
+	bufferline.sort_buffers_by(function(buf_a, buf_b)
+		if bufferline.pinned[buf_a.id] and not bufferline.pinned[buf_b.id] then
+			return true 
+		elseif not bufferline.pinned[buf_a.id] and bufferline.pinned[buf_b.id] then
+			return false 
+		else
+			return buf_a.id < buf_b.id
+		end
+	end)
+
+	vim.cmd("redrawtabline")
+	vim.cmd("redraw")
+end
+
 bufferline.setup({
 	options = {
 		numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -16,10 +39,11 @@ bufferline.setup({
 		-- as an escape hatch for people who cannot bear it for whatever reason
 		indicator_icon = "▎",
 		buffer_close_icon = "",
+    pinned_icon = "", -- 
 		-- buffer_close_icon = '',
 		modified_icon = "●",
 		-- close_icon = "",
-		close_icon = '',
+		close_icon = "",
 		left_trunc_marker = "",
 		right_trunc_marker = "",
 		--- name_formatter can be used to change the buffer's label in the bufferline.
@@ -56,7 +80,16 @@ bufferline.setup({
 		--     return true
 		--   end
 		-- end,
-		offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+		offsets = {
+			{
+				filetype = "NvimTree",
+				-- text = "", -- | function
+				text = vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+				highlight = "NvimTreeCWD",
+				-- text_align = "left" | "center" | "right",
+				padding = 1,
+			},
+		},
 		show_buffer_icons = true,
 		show_buffer_close_icons = true,
 		show_close_icon = false,
@@ -166,3 +199,5 @@ bufferline.setup({
 		},
 	},
 })
+
+return M

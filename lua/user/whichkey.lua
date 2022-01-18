@@ -33,8 +33,8 @@ local normal = {
   ["<Down>"]  = map("Move to pane below",         "<C-w>j"),
   ["<Up>"]    = map("Move to pane above",         "<C-w>k"),
   ["<Right>"] = map("Move to right pane",         "<C-w>l"),
-  ["<C-l>"]   = map("Next buffer",                "<cmd>bnext<CR>"),
-  ["<C-h>"]   = map("Previous buffer",            "<cmd>bprevious<CR>"),
+  ["<C-l>"]   = map("Next buffer",                "<cmd>BufferLineCycleNext<CR>"),
+  ["<C-h>"]   = map("Previous buffer",            "<cmd>BufferLineCyclePrev<CR>"),
   ["<C-j>"]   = map("Scroll down",                "<C-e><C-e><C-e>"),
   ["<C-k>"]   = map("Scroll up",                  "<C-y><C-y><C-y>"),
   ["<C-n>"]   = map("Next qf item",               "<cmd>cnext<CR>"),
@@ -62,9 +62,22 @@ local normal = {
     n         = map("Sync explorer",              "<cmd>NvimTreeFindFile<CR>"),
     s         = map("Swap panes",                 "<C-w>r<cmd>NvimTreeToggle<CR><cmd>NvimTreeToggle<CR><C-w>l"),
     c         = map("Close buffer",               "<cmd>Bdelete<CR>"),
+    -- C         = map("Close all but current",      "<cmd>BufferCloseAllButCurrent<CR>"),
+    p         = map("Pin buffer",                 "<cmd>lua require('user.bufferline').toggle_pin()<CR>"),
+    P         = map("Close all but pinned",       "<cmd>lua require('bufferline').close_all_but_pinned()<CR>"),
     x         = map("Close window",               "<cmd>x<CR>"),
     w         = map("Scratch buffer",             "<cmd>Scratch<CR>"),
     t         = map("Open terminal",              "<cmd>FloatermToggle<<CR>"),
+
+    b = {
+      name    = "Manage buffers",
+      l       = map("Move to right",              "<cmd>BufferLineMoveNext<CR>"),
+      h       = map("Move to left",               "<cmd>BufferLineMovePrev<CR>"),
+      c       = map("Close buffer",               "<cmd>Bdelete<CR>"),
+      -- C       = map("Close all but current",      "<cmd>BufferCloseAllButCurrent<CR>"),
+      -- p       = map("Pin buffer",                 "<cmd>BufferPin<CR>"),
+      P       = map("Close all but pinned",       "<cmd>lua require('bufferline').close_all_but_pinned()<CR>"),
+    },
 
     f = {
       name    = "Find",
@@ -123,7 +136,7 @@ local normal = {
       n       = map("Create worktree",            "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>"),
     },
 
-    p = {
+    i = {
       name    = "Packer",
       c       = map("Compile",                    "<cmd>PackerCompile<CR>"),
       i       = map("Install",                    "<cmd>PackerInstall<CR>"),
