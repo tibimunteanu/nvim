@@ -14,7 +14,7 @@ null_ls.setup({
 		-- ES
 		diagnostics.eslint_d,
 		code_actions.eslint_d,
-		code_actions.gitsigns,
+		-- code_actions.gitsigns,
 		formatting.prettierd.with({
 			filetypes = {
 				"javascript",

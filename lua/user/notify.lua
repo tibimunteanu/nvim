@@ -37,4 +37,4 @@ notify.setup({
 	},
 })
 
-vim.notify = require("notify")
+vim.notify = notify

@@ -4,24 +4,49 @@ if not status_ok then
 	return
 end
 
+local builtin = require("telescope.builtin")
+local actions = require("telescope.actions")
+local themes = require("telescope.themes")
+local sorters = require("telescope.sorters")
+local previewers = require("telescope.previewers")
+
 telescope.load_extension("git_worktree")
 telescope.load_extension("fzy_native")
 
-local actions = require("telescope.actions")
-
 -- stylua: ignore start
+local ddOpts = themes.get_dropdown({
+  hidden = true,
+  preview_title = false,
+  results_title = false,
+  -- winblend = 10,
+  -- show_line = true,
+
+  layout_strategy = 'vertical',
+  layout_config = {
+    width = 0.9,
+    height = 0.95,
+    prompt_position = "top",
+    scroll_speed = 3,
+    preview_height = 0.7,
+    -- preview_cutoff = 10,
+  }
+})
+
+local ivyOpts = themes.get_ivy()
+local cOpts = themes.get_cursor()
+
 telescope.setup {
   defaults = {
     prompt_prefix       = " ",
     selection_caret     = " ",
     -- borderchars      = { '─', '│', '─', '│', '┍', '┑', '┙', '┕' },
     color_devicons      = true,
-    path_display        = { "smart" },  
-    file_sorter         = require('telescope.sorters').get_fzy_sorter,
+    path_display        = { "smart" },
+    file_sorter         = sorters.get_fzy_sorter,
 
-    file_previewer      = require('telescope.previewers').vim_buffer_cat.new,
-    grep_previewer      = require('telescope.previewers').vim_buffer_vimgrep.new,
-    qflist_previewer    = require('telescope.previewers').vim_buffer_qflist.new,
+    file_previewer      = previewers.vim_buffer_cat.new,
+    grep_previewer      = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer    = previewers.vim_buffer_qflist.new,
 
     mappings = {
       n = {
@@ -70,22 +95,24 @@ telescope.setup {
     },
   },
   pickers = {
-    find_files = {
-      hidden = true
-    },
-    git_files = {
-      find_command = { "git", "ls-files", "-L", "--exclude-standard", "--cached"}
-    },
-    file_browser = {
-      hidden = true
-    },
-    buffers = {
-      mappings = {
-        n = {
-          ["d"] = actions.delete_buffer,
-        },
-      },
-    },
+    git_files = ddOpts,
+    find_files = ddOpts,
+    buffers = ddOpts,
+    file_browser = ddOpts,
+    git_branches = ddOpts,
+    grep_string = ddOpts,
+    live_grep = ddOpts,
+    diagnostics = ddOpts,
+    lsp_document_symbols = ddOpts,
+    lsp_dynamic_workspace_symbols = ddOpts,
+    colorscheme = ddOpts,
+    man_pages = ddOpts,
+    oldfiles = ddOpts,
+    registers = ddOpts,
+    keymaps = ddOpts,
+    commands = ddOpts,
+    current_buffer_fuzzy_find = ivyOpts,
+    lsp_code_actions = cOpts,
   },
   extensions = {
     fzy_native = {
@@ -98,22 +125,40 @@ telescope.setup {
 
 local M = {}
 
+M.project_files = function()
+	local ok = pcall(builtin.git_files, {
+		find_command = { "git", "ls-files", "-L", "--exclude-standard", "--cached" },
+	})
+	if not ok then
+		builtin.find_files({})
+	end
+end
+
+M.open_buffers = function()
+	builtin.buffers({
+		attach_mappings = function(_, map)
+			map("n", "<c-d>", actions.delete_buffer)
+			return true
+		end,
+	})
+end
+
 M.config_files = function()
-	require("telescope.builtin").find_files({
+	builtin.find_files({
 		prompt_title = "vim",
 		cwd = "~/.config/nvim/",
 	})
 end
 
 M.colorscheme_files = function()
-	require("telescope.builtin").find_files({
+	builtin.find_files({
 		prompt_title = "colorscheme",
 		cwd = "~/.local/share/nvim/site/pack/packer/start/darknvim/",
 	})
 end
 
 M.git_branches = function()
-	require("telescope.builtin").git_branches({
+	builtin.git_branches({
 		attach_mappings = function(_, map)
 			map("i", "<c-d>", actions.git_delete_branch)
 			map("n", "<c-d>", actions.git_delete_branch)

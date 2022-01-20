@@ -44,6 +44,7 @@ local normal = {
   H           = map("Go to line start",           "^"),
   L           = map("Go to line end",             "$"),
   Q           = map("Apply macro",                "@q"),
+  K           = map("Hover",                      "<cmd>lua vim.lsp.buf.hover()<CR>"),
 
   g = {
     name      = "LSP",
@@ -53,7 +54,8 @@ local normal = {
     r         = map("Find all references",        "<cmd>lua vim.lsp.buf.references()<CR>"),
     f         = map("Format buffer",              "<cmd>lua vim.lsp.buf.formatting()<CR>"),
     l         = map("Show line diagnostic",       "<cmd>lua vim.diagnostic.open_float()<CR>"),
-    ["."]     = map("Code actions",               "<cmd>lua require('cosmic-ui').code_actions()<CR>"), -- lua vim.lsp.buf.code_action()
+    ["."]     = map("Code actions",               "<cmd>Telescope lsp_code_actions<CR>"), -- <cmd>lua require('cosmic-ui').code_actions()<CR>") -- lua vim.lsp.buf.code_action()
+    s         = map("Document symbol",            "<cmd>lua vim.lsp.buf.document_symbol()<CR>"),
   },
 
   ["<leader>"] = {
@@ -83,15 +85,15 @@ local normal = {
       name    = "Find",
       v       = map("Config files",               "<cmd>lua require('user.telescope').config_files()<CR>"),
       c       = map("Colorscheme files",          "<cmd>lua require('user.telescope').colorscheme_files()<CR>"),
-      a       = map("All files",                  "<cmd>Telescope find_files<CR>"),
-      f       = map("Git files",                  "<cmd>Telescope git_files<CR>"),
-      o       = map("Buffers",                    "<cmd>Telescope buffers<CR>"),
-      h       = map("Help tags",                  "<cmd>Telescope help_tags<CR>"),
-      e       = map("File browser",               "<cmd>Telescope file_browser<CR>"),
+      o       = map("Buffers",                    "<cmd>lua require('user.telescope').open_buffers()<CR>"),
+      f       = map("Git files",                  "<cmd>lua require('user.telescope').project_files()<CR>"),
       i       = map("Grep",                       "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For >') })<CR>"),
       w       = map("Grep current word",          "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<CR>"),
-      g       = map("Live grep",                  "<cmd>lua require('telescope.builtin').live_grep()<CR>"),
-      z       = map("Grep in file",               "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_ivy())<CR>"),
+      g       = map("Live grep",                  "<cmd>Telescope live_grep<CR>"),
+      a       = map("All files",                  "<cmd>Telescope find_files<CR>"),
+      h       = map("Help tags",                  "<cmd>Telescope help_tags<CR>"),
+      e       = map("File browser",               "<cmd>Telescope file_browser<CR>"),
+      z       = map("Grep in file",               "<cmd>Telescope current_buffer_fuzzy_find<CR>"),
       d       = map("Document diagnostics",       "<cmd>Telescope diagnostics bufnr=0<CR>"),
       D       = map("Workspace diagnostics",      "<cmd>Telescope diagnostics<CR>"),
       s       = map("Document Symbols",           "<cmd>Telescope lsp_document_symbols<CR>"),
