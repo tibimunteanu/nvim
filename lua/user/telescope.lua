@@ -13,7 +13,9 @@ local previewers = require("telescope.previewers")
 telescope.load_extension("git_worktree")
 telescope.load_extension("fzy_native")
 
-local verticalOpts = {
+local M = {}
+
+M.verticalOpts = {
 	hidden = true,
 	layout_strategy = "vertical",
 	layout_config = {
@@ -26,7 +28,7 @@ local verticalOpts = {
 	},
 }
 
-local flexOpts = {
+M.flexOpts = {
 	hidden = true,
 	layout_strategy = "flex",
 	layout_config = {
@@ -51,8 +53,17 @@ local flexOpts = {
 	},
 }
 
-local ivyOpts = themes.get_ivy()
-local cursorOpts = themes.get_cursor()
+M.ivyOpts = themes.get_ivy()
+M.cursorOpts = themes.get_cursor()
+M.cursorPreviewOpts = themes.get_cursor({
+  layout_config = {
+    width = 0.7,
+    height = 0.2,
+    preview_cutoff = 60,
+    preview_width = 0.6,
+    scroll_speed = 3,
+  }
+})
 
 -- stylua: ignore start
 telescope.setup {
@@ -115,24 +126,26 @@ telescope.setup {
     },
   },
   pickers = {
-    git_files = verticalOpts,
-    find_files = verticalOpts,
-    buffers = verticalOpts,
-    file_browser = verticalOpts,
-    git_branches = verticalOpts,
-    grep_string = verticalOpts,
-    live_grep = verticalOpts,
-    diagnostics = verticalOpts,
-    lsp_document_symbols = verticalOpts,
-    lsp_dynamic_workspace_symbols = verticalOpts,
-    colorscheme = verticalOpts,
-    man_pages = verticalOpts,
-    oldfiles = verticalOpts,
-    registers = verticalOpts,
-    keymaps = verticalOpts,
-    commands = verticalOpts,
-    current_buffer_fuzzy_find = ivyOpts,
-    lsp_code_actions = cursorOpts,
+    git_files = M.verticalOpts,
+    find_files = M.verticalOpts,
+    buffers = M.cursorPreviewOpts,
+    file_browser = M.verticalOpts,
+    git_branches = M.verticalOpts,
+    grep_string = M.verticalOpts,
+    live_grep = M.verticalOpts,
+    diagnostics = M.verticalOpts,
+    lsp_document_symbols = M.verticalOpts,
+    lsp_dynamic_workspace_symbols = M.verticalOpts,
+    colorscheme = M.verticalOpts,
+    man_pages = M.verticalOpts,
+    oldfiles = M.verticalOpts,
+    registers = M.verticalOpts,
+    keymaps = M.verticalOpts,
+    commands = M.verticalOpts,
+    git_status = M.verticalOpts,
+    current_buffer_fuzzy_find = M.ivyOpts,
+    lsp_code_actions = M.cursorOpts,
+    lsp_references = M.cursorPreviewOpts,
   },
   extensions = {
     fzy_native = {
@@ -142,8 +155,6 @@ telescope.setup {
   },
 }
 -- stylua: ignore end
-
-local M = {}
 
 M.project_files = function()
 	local ok = pcall(builtin.git_files, {
