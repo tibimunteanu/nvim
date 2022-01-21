@@ -14,23 +14,35 @@ telescope.load_extension("git_worktree")
 telescope.load_extension("fzy_native")
 
 -- stylua: ignore start
-local ddOpts = themes.get_dropdown({
+local ddOpts = {
   hidden = true,
   preview_title = false,
   results_title = false,
   -- winblend = 10,
-  -- show_line = true,
+  show_line = false,
 
-  layout_strategy = 'vertical',
+  layout_strategy = "flex",
   layout_config = {
-    width = 0.9,
-    height = 0.95,
-    prompt_position = "top",
-    scroll_speed = 3,
-    preview_height = 0.7,
-    -- preview_cutoff = 10,
+    horizontal = {
+      width = 0.9,
+      height = 0.95,
+      prompt_position = "bottom",
+      scroll_speed = 3,
+      preview_width = 0.5,
+      -- preview_cutoff = 1,
+    },
+    vertical = {
+      flip_lines = 100,
+      -- flip_columns = 80,
+      width = 0.9,
+      height = 0.95,
+      prompt_position = "top",
+      scroll_speed = 3,
+      -- preview_height = 0.7,
+      -- preview_cutoff = 10,
+    }
   }
-})
+}
 
 local ivyOpts = themes.get_ivy()
 local cOpts = themes.get_cursor()
