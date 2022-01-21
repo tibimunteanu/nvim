@@ -20,13 +20,22 @@ M.verticalOpts = {
 	layout_strategy = "vertical",
 	layout_config = {
 		width = 0.9,
-		height = 0.95,
+		height = 0.92,
 		prompt_position = "bottom",
 		preview_cutoff = 60,
 		preview_height = 0.7,
 		scroll_speed = 3,
 	},
 }
+
+M.smallCenterOpts = themes.get_dropdown({
+	hidden = true,
+	layout_config = {
+		width = 80,
+		height = 20,
+		preview_cutoff = 300,
+	},
+})
 
 M.flexOpts = {
 	hidden = true,
@@ -55,10 +64,17 @@ M.flexOpts = {
 
 M.ivyOpts = themes.get_ivy()
 M.cursorOpts = themes.get_cursor()
+M.cursorNoPreviewOpts = themes.get_cursor({
+  layout_config = {
+    height = 20,
+    preview_cutoff = 300,
+    preview_width = 0,
+  }
+})
 M.cursorPreviewOpts = themes.get_cursor({
   layout_config = {
-    width = 0.7,
-    height = 0.2,
+    width = 100,
+    height = 30,
     preview_cutoff = 60,
     preview_width = 0.6,
     scroll_speed = 3,
@@ -128,7 +144,7 @@ telescope.setup {
   pickers = {
     git_files = M.verticalOpts,
     find_files = M.verticalOpts,
-    buffers = M.cursorPreviewOpts,
+    buffers = M.smallCenterOpts,
     file_browser = M.verticalOpts,
     git_branches = M.verticalOpts,
     grep_string = M.verticalOpts,
@@ -145,7 +161,7 @@ telescope.setup {
     git_status = M.verticalOpts,
     current_buffer_fuzzy_find = M.ivyOpts,
     lsp_code_actions = M.cursorOpts,
-    lsp_references = M.cursorPreviewOpts,
+    lsp_references = M.verticalOpts,
   },
   extensions = {
     fzy_native = {

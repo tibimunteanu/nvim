@@ -116,11 +116,12 @@ local normal = {
       h       = map("Hover",                      "<cmd>lua vim.lsp.buf.hover()<CR>"),
       f       = map("Function signature",         "<cmd>lua vim.lsp.buf.signature_help()<CR>"),
       q       = map("Location list diagnostics",  "<cmd>lua vim.diagnostic.setloclist()<CR>"),
+      u       = map("Preveiw references",         "<cmd>Telescope lsp_references<CR>"),
     },
 
     g = {
       name    = "Git",
-      g       = map("Lazygit",                    "<cmd>lua _LAZYGIT_TOGGLE()<CR>"),
+      s       = map("Status",                     "<cmd>Telescope git_status<CR>"),
       d       = map("Diff",                       "<cmd>Gitsigns diffthis HEAD<CR>"),
       j       = map("Next Hunk",                  "<cmd>lua require('gitsigns').next_hunk()<CR>"),
       k       = map("Prev Hunk",                  "<cmd>lua require('gitsigns').prev_hunk()<CR>"),
@@ -128,7 +129,7 @@ local normal = {
       p       = map("Preview Hunk",               "<cmd>lua require('gitsigns').preview_hunk()<CR>"),
       r       = map("Reset Hunk",                 "<cmd>lua require('gitsigns').reset_hunk()<CR>"),
       R       = map("Reset Buffer",               "<cmd>lua require('gitsigns').reset_buffer()<CR>"),
-      s       = map("Stage Hunk",                 "<cmd>lua require('gitsigns').stage_hunk()<CR>"),
+      a       = map("Stage Hunk",                 "<cmd>lua require('gitsigns').stage_hunk()<CR>"),
       u       = map("Undo Stage Hunk",            "<cmd>lua require('gitsigns').undo_stage_hunk()<CR>"),
       o       = map("Open changed file",          "<cmd>Telescope git_status<CR>"),
       b       = map("Branches",                   "<cmd>Telescope git_branches<CR>"),
