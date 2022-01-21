@@ -13,40 +13,48 @@ local previewers = require("telescope.previewers")
 telescope.load_extension("git_worktree")
 telescope.load_extension("fzy_native")
 
--- stylua: ignore start
-local ddOpts = {
-  hidden = true,
-  preview_title = false,
-  results_title = false,
-  -- winblend = 10,
-  show_line = false,
+local verticalOpts = {
+	hidden = true,
+	layout_strategy = "vertical",
+	layout_config = {
+		width = 0.9,
+		height = 0.95,
+		prompt_position = "bottom",
+		preview_cutoff = 60,
+		preview_height = 0.7,
+		scroll_speed = 3,
+	},
+}
 
-  layout_strategy = "flex",
-  layout_config = {
-    horizontal = {
-      width = 0.9,
-      height = 0.95,
-      prompt_position = "bottom",
-      scroll_speed = 3,
-      preview_width = 0.5,
-      -- preview_cutoff = 1,
-    },
-    vertical = {
-      flip_lines = 100,
-      -- flip_columns = 80,
-      width = 0.9,
-      height = 0.95,
-      prompt_position = "top",
-      scroll_speed = 3,
-      -- preview_height = 0.7,
-      -- preview_cutoff = 10,
-    }
-  }
+local flexOpts = {
+	hidden = true,
+	layout_strategy = "flex",
+	layout_config = {
+		flip_columns = 170,
+		flip_lines = 100,
+		horizontal = {
+			width = 0.9,
+			height = 0.95,
+			prompt_position = "bottom",
+			preview_width = 0.6,
+			preview_cutoff = 60,
+			scroll_speed = 3,
+		},
+		vertical = {
+			width = 0.9,
+			height = 0.95,
+			prompt_position = "bottom",
+      preview_height = 0.7,
+			preview_cutoff = 80,
+			scroll_speed = 3,
+		},
+	},
 }
 
 local ivyOpts = themes.get_ivy()
-local cOpts = themes.get_cursor()
+local cursorOpts = themes.get_cursor()
 
+-- stylua: ignore start
 telescope.setup {
   defaults = {
     prompt_prefix       = " ",
@@ -107,24 +115,24 @@ telescope.setup {
     },
   },
   pickers = {
-    git_files = ddOpts,
-    find_files = ddOpts,
-    buffers = ddOpts,
-    file_browser = ddOpts,
-    git_branches = ddOpts,
-    grep_string = ddOpts,
-    live_grep = ddOpts,
-    diagnostics = ddOpts,
-    lsp_document_symbols = ddOpts,
-    lsp_dynamic_workspace_symbols = ddOpts,
-    colorscheme = ddOpts,
-    man_pages = ddOpts,
-    oldfiles = ddOpts,
-    registers = ddOpts,
-    keymaps = ddOpts,
-    commands = ddOpts,
+    git_files = verticalOpts,
+    find_files = verticalOpts,
+    buffers = verticalOpts,
+    file_browser = verticalOpts,
+    git_branches = verticalOpts,
+    grep_string = verticalOpts,
+    live_grep = verticalOpts,
+    diagnostics = verticalOpts,
+    lsp_document_symbols = verticalOpts,
+    lsp_dynamic_workspace_symbols = verticalOpts,
+    colorscheme = verticalOpts,
+    man_pages = verticalOpts,
+    oldfiles = verticalOpts,
+    registers = verticalOpts,
+    keymaps = verticalOpts,
+    commands = verticalOpts,
     current_buffer_fuzzy_find = ivyOpts,
-    lsp_code_actions = cOpts,
+    lsp_code_actions = cursorOpts,
   },
   extensions = {
     fzy_native = {
