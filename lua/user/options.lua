@@ -38,8 +38,8 @@ local options = {
   expandtab = true,                        -- convert tabs to spaces
   smartindent = true,                      -- make indenting smarter again
 
-  number = true,                           -- set numbered lines
-  relativenumber = true,                   -- set relative numbered lines
+  number = false,                          -- set numbered lines
+  relativenumber = false,                  -- set relative numbered lines
   numberwidth = 1,                         -- set number column width
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time. or merge with "number" column.
   cursorline = false,                      -- highlight the current line
@@ -71,9 +71,9 @@ for k, v in pairs(options) do
 end
 
 -- TODO: can we do these with :append?
+-- set iskeyword+=-
 vim.cmd([[
   set expandtab
   set whichwrap+=<,>,[,],h,l
-  set iskeyword+=-
   set formatoptions-=cro
 ]])
